@@ -57,7 +57,9 @@ class User extends Authenticatable implements JWTSubject
      */
     public function getJWTCustomClaims()
     {
-        return [];
+        return [
+            'userId' => $this->id
+        ];
     }
 
     public function setPasswordAttribute($value)
