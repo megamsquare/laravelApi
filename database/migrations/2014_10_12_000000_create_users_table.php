@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('firstname', 50);
             $table->string('lastname', 50);
             $table->string('middlename', 50);
-            $table->string('passport_photo');
+            $table->string('passport_photo')->nullable();
             $table->string('email', 100)->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->enum('email_verify', [0, 1])->default(0);
