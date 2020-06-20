@@ -15,7 +15,7 @@ class CreateUserContact extends Migration
     {
         Schema::create('user_contact', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('user')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->enum('contact_type', ['phone', 'address'])->nullable();
             $table->string('contact_name', 100)->nullable();
             $table->string('contact_details', 100)->nullable();
