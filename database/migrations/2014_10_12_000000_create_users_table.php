@@ -26,7 +26,7 @@ class CreateUsersTable extends Migration
             $table->string('username');
             $table->enum('status', ['Active', 'Resigned', 'Retired', 'Fired', 'Dead'])->default('Active');
             $table->enum('gender', ['Male', 'Female'])->nullable();
-            $table->enum('marital_status', ['Single', 'Married', 'Divorced'])->nullable();
+            $table->enum('marital_status', ['Single', 'Married', 'Divorced', 'Widow'])->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
