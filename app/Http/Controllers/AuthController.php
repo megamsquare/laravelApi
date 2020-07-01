@@ -31,32 +31,27 @@ class AuthController extends Controller
 
     /**
      * @OA\Post(
-     *      path="/login",
-     *      operationId="storeProject",
-     *      tags={"Projects"},
-     *      summary="Store new project",
-     *      description="Returns project data",
-     *      @OA\RequestBody(
-     *          required=true,
-     *          @OA\JsonContent(ref="#/components/schemas/StoreProjectRequest")
-     *      ),
-     *      @OA\Response(
-     *          response=201,
-     *          description="Successful operation",
-     *          @OA\JsonContent(ref="#/components/schemas/Project")
-     *       ),
-     *      @OA\Response(
-     *          response=400,
-     *          description="Bad Request"
-     *      ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden"
-     *      )
+     * path="/login",
+     * summary="User Sign in endpoint",
+     * description="Login by email and password",
+     * operationId="authLogin",
+     * tags={"auth"},
+     * @OA\RequestBody(
+     *    required=true,
+     *    description="Pass user credentials",
+     *    @OA\JsonContent(
+     *       required={"email","password"},
+     *       @OA\Property(property="email", type="string", format="email", example="user1@mail.com"),
+     *       @OA\Property(property="password", type="string", format="password", example="PassWord12345"),
+     *    ),
+     * ),
+     * @OA\Response(
+     *    response=422,
+     *    description="Wrong credentials response",
+     *    @OA\JsonContent(
+     *       @OA\Property(property="message", type="string", example="Sorry, wrong email address or password. Please try again")
+     *        )
+     *     )
      * )
      */
     public function login(Request $request)
@@ -73,7 +68,7 @@ class AuthController extends Controller
 
     public function signup(SignUpRequest $request)
     {
-        $user = User::create($request->all());
+        $user = Models\User::create($request->all());
         return $this->login($request);
     }
 

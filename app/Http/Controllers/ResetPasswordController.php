@@ -28,7 +28,7 @@ class ResetPasswordController extends Controller
 
     public function validateEmail($email)
     {
-        return !!User::where('email', $email)->first();
+        return !!Models\User::where('email', $email)->first();
     }
 
     public function failResponse()
