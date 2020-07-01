@@ -12,7 +12,7 @@ use Illuminate\Routing\Controller as BaseController;
      * @OA\Info(
      *      version="1.0.0",
      *      title="Laravel Api Documentation",
-     *      description="L5 Swagger OpenApi description",
+     *      description="This is a WEBAPI for multi-purpose application",
      *      @OA\Contact(
      *          email="msquaremega@gmail.com"
      *      ),
