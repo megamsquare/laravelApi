@@ -18,7 +18,7 @@ class AuthController extends Controller
     public function __construct()
     {
         // $this->middleware('auth:api', ['except' => ['login', 'signup']]);
-        $this->middleware('jwt', ['except' => ['login', 'signup']]);
+        $this->middleware('jwt', ['except' => ['login', 'createUser']]);
     }
 
     /**
@@ -103,8 +103,10 @@ class AuthController extends Controller
      */
     public function createUser(SignUpRequest $request)
     {
-        $user = Models\User::create($request->all());
-        return $this->login($request);
+        if ($request->all()) {
+            $user = User::create($request->all());
+            return response()->json(['message' => 'Successful']);
+        }
     }
 
     /**
