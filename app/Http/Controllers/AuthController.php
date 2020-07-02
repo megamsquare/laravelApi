@@ -17,7 +17,8 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'signup']]);
+        // $this->middleware('auth:api', ['except' => ['login', 'signup']]);
+        $this->middleware('jwt', ['except' => ['login', 'signup']]);
     }
 
     /**
@@ -70,10 +71,10 @@ class AuthController extends Controller
 
     /**
      * @OA\Post(
-     * path="/signup",
+     * path="/createUser",
      * summary="User Sign Up endpoint",
      * description="Sign Up user with",
-     * operationId="authSignup",
+     * operationId="authCreateUser",
      * tags={"auth"},
      * @OA\RequestBody(
      *    required=true,
@@ -100,7 +101,7 @@ class AuthController extends Controller
      *     )
      * )
      */
-    public function signup(SignUpRequest $request)
+    public function createUser(SignUpRequest $request)
     {
         $user = Models\User::create($request->all());
         return $this->login($request);
