@@ -17,8 +17,8 @@ Route::group([
 
     Route::post('refresh', 'AuthController@refresh');
 
-    Route::post('me', 'AuthController@me');
-    
+    Route::get('me', 'AuthController@me');
+
     Route::post('sendPasswordReset', 'ResetPasswordController@sendEmail');
 
 });
