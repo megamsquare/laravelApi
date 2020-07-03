@@ -15,6 +15,8 @@ class CreateGradesTable extends Migration
     {
         Schema::create('grades', function (Blueprint $table) {
             $table->id();
+            $table->string('grade_name', 100);
+            $table->string('grade_code', 20);
             $table->timestamps();
         });
     }
