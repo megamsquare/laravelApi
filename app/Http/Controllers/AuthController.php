@@ -116,7 +116,7 @@ class AuthController extends Controller
         if ($user) {
             # code...
         } else {
-            return response()->json(['error' => 'Could not update your details']);
+            return response()->json(['error' => 'Could not update your details'], 401);
         }
     }
 
@@ -161,12 +161,25 @@ class AuthController extends Controller
      */
     protected function respondWithToken($token)
     {
-        return response()->json([
-            'access_token' => $token,
-            'token_type' => 'bearer',
-            'expires_in' => $this->guard()->factory()->getTTL() * 60,
-            'user' => auth()->user()
-        ]);
+        $status = auth()->user()->status;
+
+        if ($status === 'Active') {
+            return response()->json([
+                'access_token' => $token,
+                'token_type' => 'bearer',
+                'expires_in' => $this->guard()->factory()->getTTL() * 60,
+                'user' => auth()->user()
+            ]);
+        } elseif ($status === 'Resigned') {
+            return response()->json(['error' => 'This User has Resigned'], 401);
+        } elseif ($status === 'Retired') {
+            return response()->json(['error' => 'This User has Retired'], 401);
+        } elseif ($status === 'Fired') {
+            return response()->json(['error' => 'This User was Fired'], 401);
+        } elseif ($status === 'Dead') {
+            return response()->json(['error' => 'This User is Dead'], 401);
+        }
+
     }
 
     /**
