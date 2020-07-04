@@ -109,6 +109,17 @@ class AuthController extends Controller
         }
     }
 
+    public function updateUser(Request $request, $id)
+    {
+        $user = User::find($id);
+
+        if ($user) {
+            # code...
+        } else {
+            return response()->json(['error' => 'Could not update your details']);
+        }
+    }
+
     /**
      * Get the authenticated User
      *
