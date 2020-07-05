@@ -13,6 +13,8 @@ Route::group([
 
     Route::post('createUser', 'AuthController@createUser');
 
+    Route::put('updateUser/{userId}', 'AuthController@updateUser');
+
     Route::post('logout', 'AuthController@logout');
 
     Route::post('refresh', 'AuthController@refresh');

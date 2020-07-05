@@ -109,12 +109,51 @@ class AuthController extends Controller
         }
     }
 
+    // public function updateUser(Request $request, $userId)
+    // {
+    //     $user = User::findOrFail($userId);
+    //     // dd($user);
+    //     $user->update($request->all());
+
+    //     return $user;
+    // }
+
     public function updateUser(Request $request, $id)
     {
         $user = User::find($id);
+        $validate = null;
 
         if ($user) {
-            # code...
+            if (
+                $user->email === $request['email'] &&
+                $user->username === $request['username'] ||
+                $user->username === $request['username'] ||
+                $user->email === $request['email']) {
+
+                    $validate = $request->validate([
+                        // ^.*(?=.{3,})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$
+                        'firstname' => 'required|regex:/^\S*$/u|string',
+                        'lastname' => 'required|regex:/^\S*$/u|string',
+                        'username' => 'required|regex:/^\S*$/u|string',
+                        'email' => 'required|email',
+                    ]);
+
+            } else {
+
+                $validate = $request->validate([
+                    // ^.*(?=.{3,})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$
+                    'firstname' => 'required|regex:/^\S*$/u|string',
+                    'lastname' => 'required|regex:/^\S*$/u|string',
+                    'username' => 'required|regex:/^\S*$/u|string',
+                    'middlename' => 'regex:/^\S*$/u|string',
+                    'email' => 'required|email',
+                ]);
+            }
+
+            $user->update($request->all());
+
+            return response()->json(['success' => true], 200);
+
         } else {
             return response()->json(['error' => 'Could not update your details'], 401);
         }
@@ -167,7 +206,8 @@ class AuthController extends Controller
             return response()->json([
                 'access_token' => $token,
                 'token_type' => 'bearer',
-                'expires_in' => $this->guard()->factory()->getTTL() * 60
+                'expires_in' => $this->guard()->factory()->getTTL() * 60,
+                'user_details' => auth()->user()
             ]);
         } elseif ($status === 'Resigned') {
             return response()->json(['error' => 'This User has Resigned'], 401);
