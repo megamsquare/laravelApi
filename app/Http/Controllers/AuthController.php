@@ -167,8 +167,7 @@ class AuthController extends Controller
             return response()->json([
                 'access_token' => $token,
                 'token_type' => 'bearer',
-                'expires_in' => $this->guard()->factory()->getTTL() * 60,
-                'user' => auth()->user()
+                'expires_in' => $this->guard()->factory()->getTTL() * 60
             ]);
         } elseif ($status === 'Resigned') {
             return response()->json(['error' => 'This User has Resigned'], 401);
