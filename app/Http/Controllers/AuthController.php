@@ -191,6 +191,8 @@ class AuthController extends Controller
         return $this->respondWithToken($this->guard()->refresh());
     }
 
+    public function changePassword() {}
+
     /**
      * Get the token array structure.
      *
