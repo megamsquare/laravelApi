@@ -15,6 +15,8 @@ Route::group([
 
     Route::put('updateUser/{userId}', 'AuthController@updateUser');
 
+    Route::put('changePassword/{userId}', 'AuthController@changePassword');
+
     Route::post('logout', 'AuthController@logout');
 
     Route::post('refresh', 'AuthController@refresh');
