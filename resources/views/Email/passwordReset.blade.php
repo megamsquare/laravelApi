@@ -1,10 +1,10 @@
 @component('mail::message')
-# Introduction
+# Change Password Request
 
-The body of your message.
+Welcome to Testing.
 
 @component('mail::button', ['url' => ''])
-Button Text
+Click to Reset Password
 @endcomponent
 
 Thanks,<br>
