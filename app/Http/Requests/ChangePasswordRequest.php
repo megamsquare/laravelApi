@@ -13,7 +13,7 @@ class ChangePasswordRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,6 +25,8 @@ class ChangePasswordRequest extends FormRequest
     {
         return [
             //
+            'email' => 'required|email',
+            'password' => 'required|min:6|regex:/^.*(?=.{3,})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[\d\x]).*$/|confirmed'
         ];
     }
 }
