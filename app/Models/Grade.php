@@ -15,5 +15,8 @@ class Grade extends Model
      * The attributes that are mass assignable.
      *
      */
-    protected $fillable = [];
+    protected $fillable = [
+        'grade_name',
+        'grade_code'
+    ];
 }
