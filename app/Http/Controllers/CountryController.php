@@ -10,9 +10,9 @@ class CountryController extends Controller
 
     public function index() {}
 
-    public function create() {}
+    public function create(Request $request) {}
 
-    public function update() {}
+    public function update(Request $request) {}
 
-    public function delete() {}
+    public function delete(Request $request) {}
 }
