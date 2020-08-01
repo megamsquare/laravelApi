@@ -40,6 +40,8 @@ Route::group([
         function () {
 
             Route::get('getAll', 'CompanyController@index');
+
+            Route::post('create', 'CompanyController@create');
     });
 
 
