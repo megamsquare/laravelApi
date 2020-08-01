@@ -15,7 +15,14 @@ class CompanyController extends Controller
         return response()->json(['company' => $company]);
     }
 
-    public function create() {}
+    public function create(Request $request) {
+        // Validate Length & not empty
+        $validate = $request->validate([
+            'company_name' => 'required|min:3|max:100',
+            'company_address' => 'required|min:6|max:200',
+            'company_code' => 'required|min:3|max:50'
+        ]);
+    }
 
     public function edit() {}
 
