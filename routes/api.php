@@ -8,23 +8,38 @@ Route::group([
     'middleware' => 'api',
 
 ], function ($router) {
+    Route::group(
+        [
+            'prefix' => 'auth'
+        ],
+        function () {
 
-    Route::post('login', 'AuthController@login');
+            Route::post('login', 'AuthController@login');
 
-    Route::post('createUser', 'AuthController@createUser');
+            Route::post('logout', 'AuthController@logout');
 
-    Route::put('updateUser/{userId}', 'AuthController@updateUser');
+            Route::post('createUser', 'AuthController@createUser');
 
-    Route::put('changePassword/{userId}', 'AuthController@changePassword');
+            Route::post('refresh', 'AuthController@refresh');
 
-    Route::post('logout', 'AuthController@logout');
+            Route::put('updateUser/{userId}', 'AuthController@updateUser');
 
-    Route::post('refresh', 'AuthController@refresh');
+            Route::put('changePassword/{userId}', 'AuthController@changePassword');
 
-    Route::get('me', 'AuthController@me');
+            Route::get('me', 'AuthController@me');
 
-    Route::post('sendPasswordResetLink', 'ResetPasswordController@sendEmail');
+            Route::post('sendPasswordResetLink', 'ResetPasswordController@sendEmail');
 
-    Route::post('restPassword', 'ChangePasswordController@resetPassword');
+            Route::post('restPassword', 'ChangePasswordController@resetPassword');
+    });
+
+    Route::group(
+        [
+            'prefix' => 'company'
+        ],
+        function () {
+
+    });
+
 
 });
