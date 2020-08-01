@@ -17,7 +17,7 @@ class CompanyController extends Controller
     public function index() {
         // Return all Companies regardless of user
         $company = Company::orderby('created_at')->get();
-        return response()->json(['company' => $company]);
+        return response()->json([$company]);
     }
 
     public function create(Request $request) {

@@ -39,6 +39,7 @@ Route::group([
         ],
         function () {
 
+            Route::get('getAll', 'CompanyController@index');
     });
 
 
