@@ -34,11 +34,29 @@ class CompanyController extends Controller
                 'company_code' => $request['company_code']
                 // 'company_code' => $date->format('Y-m-d') . "-" . str_pad($company->id, 6, "0", STR_PAD_LEFT)
             ]);
-            return response()->json(['message' => 'Successful']);
+            return response()->json(['message' => 'Successful'], 200);
         }
     }
 
-    public function edit() {}
+    public function edit(Request $request, $id) {
+        $company = Company::find($id);
+        $validate = null;
+
+        if ($company) {
+            // Validate Length & not empty
+            $validate = $request->validate([
+                'company_name' => 'required|min:3|max:100',
+                'company_address' => 'required|min:6|max:200',
+                'company_code' => 'required|min:3|max:50|unique:companies,company_code'
+            ]);
+            if ($validate) {
+                $company->update($request->all());
+                return response()->json(['message' => 'Successful'], 200);
+            }
+        } else {
+            return response()->json(['error' => 'Could not update company details'], 401);
+        }
+    }
 
     public function delete() {}
 }
