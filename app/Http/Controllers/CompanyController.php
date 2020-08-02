@@ -39,7 +39,7 @@ class CompanyController extends Controller
     }
 
     public function edit(Request $request, $id) {
-        $company = Company::find($id);
+        $company = Company::findOrFail($id);
         $validate = null;
 
         if ($company) {
