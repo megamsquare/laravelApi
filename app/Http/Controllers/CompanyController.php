@@ -34,7 +34,7 @@ class CompanyController extends Controller
                 'company_code' => $request['company_code']
                 // 'company_code' => $date->format('Y-m-d') . "-" . str_pad($company->id, 6, "0", STR_PAD_LEFT)
             ]);
-            return response()->json(['message' => 'Successful'], 200);
+            return response()->json(['message' => 'Create Successful'], 200);
         }
     }
 
@@ -51,12 +51,20 @@ class CompanyController extends Controller
             ]);
             if ($validate) {
                 $company->update($request->all());
-                return response()->json(['message' => 'Successful'], 200);
+                return response()->json(['message' => 'Update Successful'], 200);
             }
         } else {
             return response()->json(['error' => 'Could not update company details'], 401);
         }
     }
 
-    public function delete() {}
+    public function delete($id) {
+        $company = Company::findOrFail($id);
+        if($company) {
+            $company->delete();
+            return response()->json(['message' => 'Delete Successful'], 200);
+        } else {
+            return response()->json(['error' => 'Could not delete company details'], 401);
+        }
+    }
 }
