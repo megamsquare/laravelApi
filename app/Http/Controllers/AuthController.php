@@ -120,7 +120,7 @@ class AuthController extends Controller
 
     public function updateUser(Request $request, $id)
     {
-        $user = User::find($id);
+        $user = User::findOrFail($id);
         $validate = null;
 
         if ($user) {
