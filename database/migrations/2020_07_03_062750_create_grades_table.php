@@ -17,6 +17,7 @@ class CreateGradesTable extends Migration
             $table->id();
             $table->string('grade_name', 100);
             $table->string('grade_code', 20);
+            $table->softDeletes();
             $table->timestamps();
         });
     }
