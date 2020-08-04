@@ -8,6 +8,11 @@ use App\Models\Country;
 
 class CountryController extends Controller
 {
+    public function __construct()
+    {
+        // $this->middleware('auth:api', ['except' => ['login', 'signup']]);
+        $this->middleware('jwt', ['except' => ['']]);
+    }
     //
 
     public function index() {}
