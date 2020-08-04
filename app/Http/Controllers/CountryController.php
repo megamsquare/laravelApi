@@ -15,7 +15,11 @@ class CountryController extends Controller
     }
     //
 
-    public function index() {}
+    public function index() {
+        // Return all Country regardless of use
+        $country = Country::orderby('create_at')->get();
+        return response()->json([$country]);
+    }
 
     public function create(Request $request) {}
 
