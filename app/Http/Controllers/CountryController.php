@@ -21,7 +21,13 @@ class CountryController extends Controller
         return response()->json([$country]);
     }
 
-    public function create(Request $request) {}
+    public function create(Request $request) {
+        // Validate Lenght & not empty
+        $validate = $request->validate([
+            'country_name' => 'required|min:3|max:100',
+            'country_code' => 'required|min:3|max:50|unique:countries,country_code'
+        ]);
+    }
 
     public function update(Request $request) {}
 
