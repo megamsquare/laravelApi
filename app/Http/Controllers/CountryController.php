@@ -41,7 +41,17 @@ class CountryController extends Controller
         $validate = null;
 
         if ($country) {
-            # code...
+            // Validate Length & Not Empty
+            $validate = $request->validate([
+                'country_name' => 'required|min:3|max:100',
+                'country_code' => 'required|min:3|max:50|unique:countries,country_code'
+            ]);
+            if ($validate) {
+                $country->update($request->all());
+                return response()->json(['message' => 'Update Successful'], 200);
+            }
+        } else {
+            return response()->json(['error' => 'Could not update Country details'], 401);
         }
     }
 
