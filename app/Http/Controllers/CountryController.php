@@ -55,5 +55,13 @@ class CountryController extends Controller
         }
     }
 
-    public function delete(Request $request) {}
+    public function delete($id) {
+        $country = Country::findOrFail($id);
+        if ($country) {
+            $country->delete();
+            return response()->json(['message' => 'Delete Successful'], 200);
+        } else {
+            return response()->json(['error' => 'Could note Delete company details'], 401);
+        }
+    }
 }
