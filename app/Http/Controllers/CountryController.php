@@ -36,7 +36,14 @@ class CountryController extends Controller
         }
     }
 
-    public function update(Request $request) {}
+    public function update(Request $request, $id) {
+        $country = Country::findOrFail($id);
+        $validate = null;
+
+        if ($country) {
+            # code...
+        }
+    }
 
     public function delete(Request $request) {}
 }
