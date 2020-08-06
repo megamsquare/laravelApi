@@ -27,6 +27,13 @@ class CountryController extends Controller
             'country_name' => 'required|min:3|max:100',
             'country_code' => 'required|min:3|max:50|unique:countries,country_code'
         ]);
+        if ($request->all()) {
+            $country = Country::create([
+                'country_name' => $request['country_name'],
+                'country_code' => $request['country_code']
+            ]);
+            return response()->json(['message' => 'Create Successful'], 200);
+        }
     }
 
     public function update(Request $request) {}
