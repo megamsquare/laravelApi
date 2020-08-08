@@ -35,7 +35,23 @@ class GradeController extends Controller
         }
     }
 
-    public function edit() {}
+    public function edit(Request $request, $id) {
+        $grade = Grade::findOrFail($id);
+        $validate = null;
+
+        if ($grade) {
+            $validate = $request->validate([
+                'grade_name' => 'required|min:3|max:100',
+                'grade_code' => 'required|min:3|max:50|unique:companies,company_code'
+            ]);
+            if ($validate) {
+                $grade->update($request->all());
+                return response()->json(['message' => 'Update Successful'], 200);
+            } else {
+                return response()->json(['error' => 'Could not update company details'], 401);
+            }
+        }
+    }
 
     public function delete() {}
 }
