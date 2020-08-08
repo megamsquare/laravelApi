@@ -8,6 +8,11 @@ use App\Models\Grade;
 
 class GradeController extends Controller
 {
+    public function __construct()
+    {
+        // $this->middleware('auth:api', ['except' => ['login', 'signup']]);
+        $this->middleware('jwt', ['except' => ['']]);
+    }
     //
     public function index() {}
 
