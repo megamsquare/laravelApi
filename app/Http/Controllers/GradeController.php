@@ -20,7 +20,20 @@ class GradeController extends Controller
         return response()->json([$grade], 200);
     }
 
-    public function create(Request $request) {}
+    public function create(Request $request) {
+        // Validate Length & Not Empty
+        $validate = $request->vaidate([
+            'grade_name' => 'required|min:3|max:100',
+            'grade_code' => 'required|min:3|max:50|unique:companies,company_code'
+        ]);
+        if ($request->all()) {
+            $grade = Grade::create([
+                'grade_name' => $request['grade_name'],
+                'grade_code' => $request['grade_code']
+            ]);
+            return response()->json(['message' => 'Created Successfully'], 200);
+        }
+    }
 
     public function edit() {}
 
