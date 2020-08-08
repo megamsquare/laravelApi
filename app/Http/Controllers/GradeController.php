@@ -53,5 +53,13 @@ class GradeController extends Controller
         }
     }
 
-    public function delete() {}
+    public function delete($id) {
+        $grade = Grade::findOrFail($id);
+        if ($grade) {
+            $grade->delete();
+            return response()->json(['message' => 'Delete Successful'], 200);
+        } else {
+            return response()->json(['error' => 'Could not delete company details'], 200);
+        }
+    }
 }
