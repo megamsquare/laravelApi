@@ -14,9 +14,13 @@ class GradeController extends Controller
         $this->middleware('jwt', ['except' => ['']]);
     }
     //
-    public function index() {}
+    public function index() {
+        // Return all Grades regardless of user
+        $grade = Grade::orderby('created_at')->get();
+        return response()->json([$grade], 200);
+    }
 
-    public function create() {}
+    public function create(Request $request) {}
 
     public function edit() {}
 
